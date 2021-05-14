@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Employees</h1>
+        </div>
+        <div class="col-sm-6 text-right">
+            <button class="btn btn-outline-dark" (click)="addNewEmployee()" style="border-radius: 50px">+ Add New</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card bg-light">
+                <div class="row">
+                    <div class="col-sm-4">
+
+                        
+                        <div class="card card-secondary side-menu-btn" id="{{i}}" *ngFor="let emp of employeeList; let i = index">
+                            <div class="card-body d-flex justify-content-between" style="align-items: center">
+                                <a href="#" (click)="setEmployee($event, i)">
+                                    <div class="float-left">
+                                        <h4>{{emp.fullName}}</h4>
+                                        <h6>{{getPositionDesc(emp.position)}}</h6>
+                                    </div>
+                                </a>
+                                <div class="float-right">
+                                    <a href="#" class="text-secondary" (click)="deleteEmployee(emp.id)">
+                                        <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="col-sm-8 bg-light">
+                        <div class="row">
+                            <div class="col-sm-12 mx-auto">
+                                <div class="card my-3">
+                                    <h4 class="text-center pt-3">Personal Information</h4>
+                                    <br />
+                                    <div class="centralize">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label>Full Name</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="fullName" [(ngModel)]="employee.fullName" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label>Address</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="address" [(ngModel)]="employee.address" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label>Phone Number</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="employee.phoneNumber" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label>Position</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" name="position" #position="ngModel" [(ngModel)]="employee.position">
+                                                    <option selected>-- Select Position --</option>
+                                                    <option *ngFor="let pos of positionList" [value]="pos.id">{{pos.description}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row my-3">
+                                            <div class="col-sm-9 text-right">
+                                                <button type="button" (click)="saveEmployee()" class="btn btn-outline-secondary">{{btnName}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

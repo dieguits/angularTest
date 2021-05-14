@@ -1,0 +1,32 @@
+.card {
+    border: none !important
+}
+
+.col {
+    margin: 0;
+}
+
+.card-secondary {
+  background-color: #cacaca !important;
+  border-bottom: 14px solid #fff !important;
+  border-right: 14px solid #fff !important;
+}
+
+.bg-selected {
+  background-color: #f8f9fa;
+  border-bottom: 14px solid #fff !important;
+  border-right: 14px solid transparent !important;
+}
+
+a {
+  text-decoration: none;
+  color: #212529;
+}
+
+.form-control {
+    margin-bottom: 15px !important;
+}
+
+.centralize {
+    margin-left: 30px;
+}
