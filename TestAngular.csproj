@@ -27,6 +27,7 @@
     <Folder Include="Models\" />
     <Folder Include="ClientApp\src\app\services\" />
     <Folder Include="ClientApp\src\app\models\" />
+    <Folder Include="Screen\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="ClientApp\dist\main-es2015.js" />
