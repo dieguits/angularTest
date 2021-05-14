@@ -12,6 +12,7 @@ export class HomeComponent {
   public employeeList: Array<Employee> = new Array<Employee>();
   public employee: Employee = new Employee();
   public btnName: string = 'Save';
+  public empSelected: number = -1;
 
   public positionList = [
     { 'id': 1, 'description': 'Project Manager' },
@@ -42,7 +43,8 @@ export class HomeComponent {
 
   setEmployee(e, index) {
     e.preventDefault();
-    console.log('here we go')
+    this.empSelected = index;
+    console.log('The employee index::: ', this.empSelected);
 
     let card: HTMLElement = document.getElementById(index);
     console.log('card', e);
@@ -91,6 +93,7 @@ export class HomeComponent {
     this.employee = new Employee();
     this.btnName = 'Save';
     this.resetButton();
+    this.empSelected = -1;
   }
 
   deleteEmployee(id) {
@@ -118,6 +121,17 @@ export class HomeComponent {
     card.classList.remove('card-secondary');
     card.classList.add('bg-selected');
     
+  }
+
+  isSelectedEmployee(index) {
+    //console.log(index)
+    if (this.empSelected == -1) {
+      return true;
+    } else if (this.empSelected == index) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }

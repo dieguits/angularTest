@@ -14,8 +14,9 @@
                 <div class="row">
                     <div class="col-sm-4">
 
-                        
-                        <div class="card card-secondary side-menu-btn" id="{{i}}" *ngFor="let emp of employeeList; let i = index">
+
+                        <!--<div class="card card-secondary side-menu-btn" id="{{i}}" *ngFor="let emp of employeeList; let i = index">-->
+                        <div class="card" [ngClass]="isSelectedEmployee(i) ? 'card-secondary' : 'bg-selected' " id="{{i}}" *ngFor="let emp of employeeList; let i = index">
                             <div class="card-body d-flex justify-content-between" style="align-items: center">
                                 <a href="#" (click)="setEmployee($event, i)">
                                     <div class="float-left">
@@ -29,7 +30,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="col-sm-8 bg-light">
                         <div class="row">
