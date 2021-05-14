@@ -30,8 +30,9 @@ export class HomeComponent {
   loadEmployees = () => {
     this.service.get("/employee").subscribe(
       (res) => {
-        console.log(res.data);
-        this.employeeList = res.data;
+        if (res.message == "Ok") {
+          this.employeeList = res.data;
+        }
       },
       (err) => {
         console.error(err);
@@ -64,14 +65,16 @@ export class HomeComponent {
       this.employee = new Employee();
       console.log(this.employeeList);
     } else {
-      let tempEmployee: Employee = this.employeeList.filter(p => p.id == this.employee.id);
+      let tempEmployee: Array<Employee> = this.employeeList.filter(p => p.id == this.employee.id);
       
-      tempEmployee.fullName = this.employee.fullName;
-      tempEmployee.address = this.employee.address;
-      tempEmployee.phoneNumber = this.employee.phoneNumber;
-      tempEmployee.position = this.employee.position;
-      this.employeeList[this.employeeList.findIndex(p => p.id == this.employee.id)] = tempEmployee;
+      tempEmployee[0].fullName = this.employee.fullName;
+      tempEmployee[0].address = this.employee.address;
+      tempEmployee[0].phoneNumber = this.employee.phoneNumber;
+      tempEmployee[0].position = this.employee.position;
+      this.employeeList[this.employeeList.findIndex(p => p.id == this.employee.id)] = tempEmployee[0];
     }
+
+    this.addNewEmployee();
     
   }
 
@@ -95,7 +98,12 @@ export class HomeComponent {
   }
 
   resetButton = () => {
-    let btnMenus: Array<HTMLElement> = document.querySelectorAll('.side-menu-btn');
+    let btnMenus: Array<HTMLElement> = new Array <HTMLElement>();
+    let items = document.querySelectorAll('.side-menu-btn');
+
+    items.forEach((item: HTMLElement) => {
+      btnMenus.push(item);
+    })    
 
     btnMenus.forEach(btn => {
       btn.classList.add('card-secondary');
@@ -103,7 +111,7 @@ export class HomeComponent {
     });
   }
 
-  toggleBtn = (card: HTMLElment, index: number) => {
+  toggleBtn = (card: HTMLElement, index: number) => {
 
     this.resetButton();
         
