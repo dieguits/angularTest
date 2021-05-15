@@ -1,3 +1,7 @@
+# Database Script
+
+To create the database and some data to start, go to the BDScript folder in the root
+
 # Employees CRUD Screen
 
 ![Image Resume](https://github.com/dieguits/angularTest/blob/master/Screen/employees.png)
