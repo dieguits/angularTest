@@ -76,7 +76,7 @@
                                         </div>
                                         <div class="row my-3">
                                             <div class="col-sm-9 text-right">
-                                                <button type="button" (click)="saveEmployee()" class="btn btn-outline-secondary">{{btnName}}</button>
+                                                <button type="button" (click)="saveEmployee()" [disabled]="!isEmployeeFilled()" class="btn btn-outline-secondary">{{btnName}}</button>
                                             </div>
                                         </div>
                                     </div>

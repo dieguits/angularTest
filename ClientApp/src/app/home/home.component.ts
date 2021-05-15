@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { isNullOrUndefined } from 'util';
 import { Employee } from '../models/employee';
 import { GeneralService } from '../services/general.service';
 
@@ -64,6 +65,14 @@ export class HomeComponent {
     this.employee.position = this.employeeList[index].position;
     console.log('card', this.employee);
     this.btnName = 'Update';
+  }
+
+  isEmployeeFilled(): boolean {
+    if (!isNullOrUndefined(this.employee.fullName) && !isNullOrUndefined(this.employee.address) && !isNullOrUndefined(this.employee.phoneNumber) && this.employee.position != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   saveEmployee() {
