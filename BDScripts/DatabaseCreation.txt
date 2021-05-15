@@ -1,0 +1,43 @@
+﻿CREATE DATABASE AngularTest;
+
+CREATE TABLE Employee
+(
+    id          INT NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+    fullName    NVARCHAR(100) NOT NULL,
+    address     NVARCHAR(150) NOT NULL,
+    phoneNumber NVARCHAR(11) NOT NULL,
+    position    INT NOT NULL
+);
+GO
+
+CREATE table Position 
+(
+    id          INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    description VARCHAR(100) NOT NULL
+);
+GO
+
+ALTER TABLE Employee
+ADD CONSTRAINT FK_Employee_Position 
+FOREIGN KEY (position) REFERENCES Position(id);
+GO
+
+INSERT INTO Position (description)
+              VALUES ('Project Manager'),
+                     ('Production Manager'),
+                     ('General Manager'),
+                     ('HR Director'),
+                     ('Senior Editor'),
+                     ('Editor'),
+                     ('Editor Boss');
+GO
+
+INSERT INTO Employee (fullName, address, phoneNumber, position)
+            VALUES ('John Doe', 'Address 1', '6471627376', 1),
+                   ('Roger Flynn', 'Address 2', '6471627365', 2),
+                   ('Alex Visaramy', 'Address 3', '6251627366', 3),
+                   ('Kyle Pitt', 'Address 4', '6474102788', 4),
+                   ('Elizabeth James', 'Address 5', '4625162736', 5),
+                   ('Shelly Bell', 'Address 6', '4625162732', 6),
+                   ('Diego Perez', 'Address 7', '4625162736', 7);
+GO

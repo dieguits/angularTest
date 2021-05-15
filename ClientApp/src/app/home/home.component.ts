@@ -14,18 +14,24 @@ export class HomeComponent {
   public btnName: string = 'Save';
   public empSelected: number = -1;
 
-  public positionList = [
-    { 'id': 1, 'description': 'Project Manager' },
-    { 'id': 2, 'description': 'Production Manager' },
-    { 'id': 3, 'description': 'General Manager' },
-    { 'id': 4, 'description': 'HR Director' },
-    { 'id': 5, 'description': 'Senior Editor' },
-    { 'id': 6, 'description': 'Editor' },
-    { 'id': 7, 'description': 'Editor Boss' },
-  ]
+  public positionList = [];
 
   constructor(private service: GeneralService) {
+    this.loadPositions();
     this.loadEmployees();
+  }
+
+  loadPositions = () => {
+    this.service.get("/position").subscribe(
+      (res) => {
+        if (res.message == "Ok") {
+          this.positionList = res.data;
+        }
+      },
+      (err) => {
+        console.error(err);
+      }
+    )
   }
 
   loadEmployees = () => {
@@ -47,7 +53,7 @@ export class HomeComponent {
     console.log('The employee index::: ', this.empSelected);
 
     let card: HTMLElement = document.getElementById(index);
-    console.log('card', e);
+    
 
     this.toggleBtn(card, index);
 
@@ -56,27 +62,41 @@ export class HomeComponent {
     this.employee.address = this.employeeList[index].address;
     this.employee.phoneNumber = this.employeeList[index].phoneNumber;
     this.employee.position = this.employeeList[index].position;
+    console.log('card', this.employee);
     this.btnName = 'Update';
   }
 
   saveEmployee() {
     
     if (this.employee.id == null || this.employee.id == -1) {
-      this.employee.id = this.getEmployeeId();
-      this.employeeList.push(this.employee);
-      this.employee = new Employee();
-      console.log(this.employeeList);
-    } else {
-      let tempEmployee: Array<Employee> = this.employeeList.filter(p => p.id == this.employee.id);
-      
-      tempEmployee[0].fullName = this.employee.fullName;
-      tempEmployee[0].address = this.employee.address;
-      tempEmployee[0].phoneNumber = this.employee.phoneNumber;
-      tempEmployee[0].position = this.employee.position;
-      this.employeeList[this.employeeList.findIndex(p => p.id == this.employee.id)] = tempEmployee[0];
-    }
 
-    this.addNewEmployee();
+      this.service.post('/employee/addEmployee', this.employee).subscribe(
+        (res) => {
+          console.log(res.data);
+          if (res.message == 'Ok') {
+            this.employeeList.push(res.data);
+            this.addNewEmployee();
+          }
+        },
+        (err) => {
+          console.error(err);
+        }
+      )
+
+    } else {
+      
+      this.service.post('/employee/updateEmployee', this.employee).subscribe(
+        (res) => {
+          if (res.message == "Ok") {
+            this.employeeList[this.employeeList.findIndex(p => p.id == this.employee.id)] = res.data;
+            this.addNewEmployee();
+          }
+        },
+        (err) => {
+          console.error(err);
+        }
+      )
+    }   
     
   }
 
@@ -97,7 +117,18 @@ export class HomeComponent {
   }
 
   deleteEmployee(id) {
-    this.employeeList = this.employeeList.filter(p => p.id != id);
+    this.service.get('/employee/deleteEmployee/' + id).subscribe(
+      (res) => {
+        console.log(res);
+        if (res.message == 'Ok') {
+          this.employeeList = this.employeeList.filter(p => p.id != id);
+        }
+      },
+      (err) => {
+        console.error(err);
+      }
+    )
+    
   }
 
   resetButton = () => {
@@ -124,7 +155,6 @@ export class HomeComponent {
   }
 
   isSelectedEmployee(index) {
-    //console.log(index)
     if (this.empSelected == -1) {
       return true;
     } else if (this.empSelected == index) {

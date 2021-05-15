@@ -15,6 +15,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.15" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +34,8 @@
     <Folder Include="ClientApp\src\app\services\" />
     <Folder Include="ClientApp\src\app\models\" />
     <Folder Include="Screen\" />
+    <Folder Include="BDScripts\" />
+    <Folder Include="CRUDS\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="ClientApp\dist\main-es2015.js" />

@@ -1,21 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
+
 namespace TestAngular.Models
 {
-    public class Employee
+    public partial class Employee
     {
-        public int id { get; set; }
-        public string fullName { get; set; }
-        public string address { get; set; }
-        public Int64 phoneNumber { get; set; }
-        public int position { get; set; }
+        public int Id { get; set; }
+        public string FullName { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
+        public int Position { get; set; }
 
-        public Employee(int id, string fullName, string address, Int64 phoneNumber, int position)
-        {
-            this.id = id;
-            this.fullName = fullName;
-            this.address = address;
-            this.phoneNumber = phoneNumber;
-            this.position = position;
-        }
+        public virtual Position PositionNavigation { get; set; }
     }
 }
